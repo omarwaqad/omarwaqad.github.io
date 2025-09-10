@@ -4,23 +4,341 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pac-Man AI Game | Omar Waqqad</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+  
   <style>
-    body { font-family: 'Poppins', sans-serif; margin: 20px; line-height: 1.6; max-width: 900px; }
-    a { color: #0d47a1; text-decoration: none; }
-    .back { display: inline-block; margin-bottom: 20px; }
-    h1 { color: #0d47a1; }
+    /* ---------- Global Styles ---------- */
+    :root {
+      --bg-dark: #121212;
+      --card-dark: #1e1e1e;
+      --accent: #0099e6;
+      --text-light: #eee;
+      --text-muted: #aaa;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      padding-top: 70px; /* avoids content hiding behind navbar */
+    }
+
+    /* ---------- Navbar ---------- */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 30px;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-photo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .nav-name {
+      color: var(--text-light);
+      font-weight: bold;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-name:hover {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      gap: 20px;
+    }
+
+    .nav-links li a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links li a:hover {
+      color: var(--accent);
+    }
+
+    /* ---------- Header/Hero ---------- */
+    header {
+      text-align: center;
+      padding: 30px 20px 20px;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn:hover {
+      background: #00cc99;
+      transform: scale(1.05);
+    }
+
+    /* ---------- Sections ---------- */
+    section {
+      padding: 20px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    section h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+      color: var(--accent);
+    }
+
+    /* ---------- About Section ---------- */
+    #about {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #about p {
+      margin-bottom: 20px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ---------- Grid & Cards ---------- */
+    .card {
+      background: var(--card-dark);
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      height: fit-content;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      max-height: 70vh;
+    }
+
+    @media (max-width: 768px) {
+      .card-grid {
+        grid-template-columns: 1fr;
+        max-height: none;
+      }
+    }
+
+    .card h2 {
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      line-height: 1.4;
+      font-size: 0.85rem;
+    }
+
+    .card ul {
+      color: var(--text-muted);
+      padding-left: 18px;
+      font-size: 0.85rem;
+    }
+
+    .card ul li {
+      margin-bottom: 3px;
+    }
+
+    .card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    /* ---------- Skills Cards ---------- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: var(--card-dark);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+
+    .skill-card .icon {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 15px;
+      color: var(--accent);
+    }
+
+    .skill-card h3 {
+      margin-bottom: 10px;
+      color: var(--accent);
+    }
+
+    #services .card {
+      text-align: center;
+    }
+
+    #services .icon {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 15px;
+    }
+
+    /* ---------- Contact Section ---------- */
+    .contact-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      font-size: 2rem;
+      margin-top: 20px;
+    }
+
+    .contact-icons a {
+      color: var(--accent);
+      transition: color 0.3s, transform 0.2s;
+    }
+
+    .contact-icons a:hover {
+      color: #00cc99;
+      transform: scale(1.2);
+    }
+
+    .contact-icons span {
+      font-size: 1rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
-  <a href="index.html" class="back">⬅ Back to Portfolio</a>
-  <h1>Pac-Man AI Game</h1>
-  <p>This innovative Pac-Man AI Game extends the classic arcade experience by featuring two intelligent, AI-controlled ghosts. One ghost employs the A* algorithm for optimal pathfinding, while the other uses the Minimax algorithm for strategic decision-making.</p>
-  <ul>
-    <li>Implemented A* algorithm for ghost navigation</li>
-    <li>Utilised Minimax for strategic AI decisions</li>
-    <li>Demonstrates expertise in algorithms and artificial intelligence</li>
-  </ul>
-  <p>🔗 <a href="https://github.com/omarwaqad">View Source on GitHub</a></p>
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-left">
+      <a href="index.html" class="nav-name">⬅ Back to Portfolio</a>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <h1>Pac-Man AI Game</h1>
+    <p>Game Development | Built with Python & Pygame</p>
+  </header>
+
+  <!-- Content -->
+  <section>
+    <div class="card-grid">
+      <div class="card">
+        <h2>Overview</h2>
+        <p>
+          Reimagined classic <strong>Pac-Man</strong> with intelligent AI-controlled ghosts. 
+          Built with <strong>Python</strong> and <strong>Pygame</strong> showcasing game logic and AI algorithms.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Tech Stack</h2>
+        <p><strong>Python • Pygame • A* Algorithm • Minimax</strong></p>
+      </div>
+
+      <div class="card">
+        <h2>AI Mechanics</h2>
+        <ul>
+          <li><strong>A*:</strong> Optimal ghost pathfinding to chase Pac-Man</li>
+          <li><strong>Minimax:</strong> Strategic move prediction to trap player</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Game Preview</h2>
+        <img src="images/pacman.png" alt="Pac-Man AI Game Screenshot" style="width:100%;border-radius:6px;">
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Omar Waqqad</p>
+  </footer>
 </body>
 </html>
