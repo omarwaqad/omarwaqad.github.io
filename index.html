@@ -5,92 +5,397 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Omar Waqqad | Flutter Developer</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #0d47a1;
-      --accent: #ff9800;
-      --bg: #f5f7fa;
-      --text: #333;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-    header { background: var(--primary); color: white; padding: 50px 20px; text-align: center; }
-    header h1 { font-size: 2.5rem; margin-bottom: 10px; }
-    header p { font-size: 1.2rem; }
-    section { padding: 40px 20px; max-width: 1000px; margin: auto; }
-    h2 { color: var(--primary); margin-bottom: 20px; }
-    ul { list-style: none; padding: 0; }
-    .card { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    .projects .project { margin-bottom: 20px; }
-    .project h3 { color: var(--accent); }
-    a { color: var(--primary); text-decoration: none; }
-    footer { background: var(--primary); color: white; text-align: center; padding: 15px; margin-top: 40px; }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+
+
+<style>
+/* ---------- Global Styles ---------- */
+:root {
+  --bg-dark: #121212;
+  --card-dark: #1e1e1e;
+  --accent: #0099e6;
+  --text-light: #eee;
+  --text-muted: #aaa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+/* ---------- Navbar ---------- */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.nav-name {
+  color: var(--text-light);
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: var(--accent);
+}
+
+body {
+  padding-top: 70px; /* avoids content hiding behind navbar */
+}
+
+
+/* ---------- Header/Hero ---------- */
+header {
+  text-align: center;
+  padding: 120px 20px 80px;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+  background: #00cc99;
+  transform: scale(1.05);
+}
+
+/* ---------- Sections ---------- */
+section {
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+section h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: var(--accent);
+}
+
+/* ---------- About Section ---------- */
+#about {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#about p {
+  margin-bottom: 20px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ---------- Grid & Cards ---------- */
+.card {
+  background: var(--card-dark);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* ---------- Skills Cards ---------- */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.skill-card {
+  background: var(--card-dark);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+.skill-card .icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 15px;
+  color: var(--accent);
+}
+
+.skill-card h3 {
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+
+#services .card {
+  text-align: center;
+}
+
+#services .icon {
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin-bottom: 15px;
+}
+
+/* ---------- Contact Section ---------- */
+.contact-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  font-size: 2rem;
+  margin-top: 20px;
+}
+
+.contact-icons a {
+  color: var(--accent);
+  transition: color 0.3s, transform 0.2s;
+}
+
+.contact-icons a:hover {
+  color: #00cc99;
+  transform: scale(1.2);
+}
+
+.contact-icons span {
+  font-size: 1rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+</style>
+
 </head>
 <body>
-  <header>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-left">
+      <img src="images/me.jpg" alt="Omar Waqqad" class="nav-photo">
+      <span class="nav-name">Omar Waqqad</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <header id="home">
     <h1>Omar Waqqad</h1>
-    <p>Mobile App Developer | Flutter Developer</p>
+    <p>Flutter Developer | Mobile App Freelancer</p>
+    <a href="#contact" class="btn">Hire Me</a>
   </header>
 
-  <section>
-    <h2>About Me</h2>
-    <p>I am a motivated Flutter developer passionate about crafting intuitive, high-performance mobile applications. Through the DEPI program and hands-on projects, I’ve honed strong skills in cross-platform development, state management, and problem-solving with algorithms. My focus is on building apps that are clean, scalable, and enjoyable to use.</p>
-  </section>
+ <section id="about">
+  <h2>About Me</h2>
+  <p>
+    I’m <strong>Omar Waqqad</strong>, a dedicated <strong>Flutter developer</strong> from Giza, Egypt. 
+    I build modern, high-performance mobile apps for Android and iOS using Flutter, Dart, and advanced state management. 
+    I work with individuals and businesses to bring app ideas to life with clean, scalable, and efficient code.
+  </p>
+  <a href="#contact" class="btn">Get In Touch</a>
+  <a href="cv.pdf" class="btn" download>Download CV</a>
+</section>
 
-  <section>
-    <h2>Skills</h2>
+
+  <!-- Services -->
+  <section id="services">
+  <h2>Services</h2>
+  <div class="card-grid">
+
     <div class="card">
-      <p><strong>Languages/Frameworks:</strong> Flutter, Dart, Java, Python, C++</p>
-      <p><strong>State Management:</strong> GetX, Bloc</p>
-      <p><strong>Databases:</strong> SQL, NoSQL, Firebase</p>
+      <i class="fa-solid fa-mobile-screen-button icon"></i>
+      <h3>Mobile App Development</h3>
+      <p>Flutter app development for Android & iOS with clean UI and smooth performance.</p>
     </div>
-  </section>
 
-  <section>
-    <h2>Services</h2>
     <div class="card">
-      <ul>
-        <li>📱 Cross-platform mobile app development</li>
-        <li>⚡ State management (GetX, Bloc)</li>
-        <li>☁️ Firebase integration (Auth, DB, Notifications)</li>
-        <li>🗄️ SQL & NoSQL database integration</li>
-        <li>🤖 Algorithmic & AI features (A*, Minimax)</li>
-      </ul>
+      <i class="fa-solid fa-palette icon"></i>
+      <h3>UI/UX Implementation</h3>
+      <p>Pixel-perfect design implementation with responsive, user-friendly layouts.</p>
     </div>
-  </section>
 
-<section class="projects">
-  <h2>Projects</h2>
-  <div class="card project">
-    <h3><a href="metro.html">Metro Guide App</a></h3>
-    <p>A mobile app that helps users navigate metro stations with intuitive UI and real-time updates. Built with Flutter.</p>
-  </div>
-  <div class="card project">
-    <h3><a href="pacman.html">Pac-Man AI Game</a></h3>
-    <p>A Pac-Man game with AI-controlled ghosts using A* and Minimax algorithms for smart movement and decision-making.</p>
+    <div class="card">
+      <i class="fa-solid fa-cloud icon"></i>
+      <h3>Firebase Integration</h3>
+      <p>Authentication, real-time databases, cloud storage, and push notifications.</p>
+    </div>
+
+    <div class="card">
+      <i class="fa-solid fa-server icon"></i>
+      <h3>Custom Backend Development</h3>
+      <p>Need more than Firebase? I can build custom backends with REST APIs or cloud solutions tailored to your project’s needs.</p>
+    </div>
+    <div class="card">
+      <i class="fa-solid fa-code icon"></i>
+      <h3>State Management</h3>
+      <p>Robust app architecture using GetX and Bloc for maintainable, scalable apps.</p>
+    </div>
+
   </div>
 </section>
 
-  <section>
+  <!-- Skills -->
+  <section id="skills">
+    <h2>Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card"><i class="devicon-flutter-plain colored icon"></i><h3>Flutter</h3></div>
+      <div class="skill-card"><i class="devicon-dart-plain colored icon"></i><h3>Dart</h3></div>
+      <div class="skill-card"><i class="devicon-firebase-plain colored icon"></i><h3>Firebase</h3></div>
+      <div class="skill-card"><i class="fa-solid fa-bolt icon"></i><h3>GetX</h3></div>
+      <div class="skill-card"><i class="fa-solid fa-diagram-project icon"></i><h3>Bloc</h3></div>
+      <div class="skill-card"><i class="devicon-python-plain colored icon"></i><h3>Python</h3></div>
+      <div class="skill-card"><i class="devicon-java-plain colored icon"></i><h3>Java</h3></div>
+      <div class="skill-card"><i class="devicon-cplusplus-plain colored icon"></i><h3>C++</h3></div>
+      <div class="skill-card"><i class="devicon-mysql-plain colored icon"></i><h3>SQL</h3></div>
+      <div class="skill-card"><i class="devicon-mongodb-plain colored icon"></i><h3>NoSQL</h3></div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Metro Guide App</h3>
+        <p>Navigation app for metro stations with real-time updates, built in Flutter.</p>
+        <a href="metro.html" class="btn">View Project</a>
+      </div>
+      <div class="card">
+        <h3>Pac-Man AI Game</h3>
+        <p>Classic Pac-Man with AI ghosts using A* and Minimax algorithms.</p>
+        <a href="pacman.html" class="btn">View Project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education">
     <h2>Education</h2>
-    <div class="card">
-      <p>🎓 Bachelor’s in Computer Science (Final Year) – Modern Academy</p>
-      <p>🎓 DEPI Program – Cross-Platform Development</p>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Bachelor’s in Computer Science</h3>
+        <p>Modern Academy, Cairo</p>
+      </div>
+      <div class="card">
+        <h3>DEPI Program</h3>
+        <p>Cross-Platform Development track: Flutter, state management, mobile solutions.</p>
+      </div>
     </div>
   </section>
 
-  <section>
-    <h2>Contact</h2>
-    <div class="card">
-      <p>Email: <a href="mailto:waqado@gmail.com">waqado@gmail.com</a></p>
-      <p>GitHub: <a href="https://github.com/omarwaqad">github.com/omarwaqad</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/omar-waqqad-3318a8284/">linkedin.com/in/omar-waqqad</a></p>
-    </div>
-  </section>
+  <!-- Contact -->
+  <section id="contact">
+  <h2>Contact</h2>
+  <div class="contact-icons">
+    <a href="mailto:waqado@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+    <a href="https://github.com/omarwaqad" target="_blank"><i class="fa-brands fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/omar-waqqad-3318a8284/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+    <span><i class="fa-solid fa-location-dot"></i> Giza, Egypt</span>
+  </div>
+  <div style="text-align:center; margin-top:20px;">
+    <a href="cv.pdf" class="btn" download>Download CV</a>
+  </div>
+</section>
 
+
+  <!-- Footer -->
   <footer>
-    <p>© 2025 Omar Waqqad</p>
+    <p>© 2025 Omar Waqqad | Built with ❤️ using HTML & CSS</p>
   </footer>
+
 </body>
+
 </html>
