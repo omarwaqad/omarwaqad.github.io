@@ -4,67 +4,91 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Omar Waqqad | Flutter Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
-    header { background: #0d47a1; color: white; padding: 20px; text-align: center; }
-    section { padding: 20px; max-width: 800px; margin: auto; }
-    h2 { color: #0d47a1; }
-    a { color: #0d47a1; text-decoration: none; }
-    .projects { margin-top: 10px; }
-    .project { margin-bottom: 20px; }
-    footer { background: #eee; text-align: center; padding: 10px; }
+    :root {
+      --primary: #0d47a1;
+      --accent: #ff9800;
+      --bg: #f5f7fa;
+      --text: #333;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    header { background: var(--primary); color: white; padding: 50px 20px; text-align: center; }
+    header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+    header p { font-size: 1.2rem; }
+    section { padding: 40px 20px; max-width: 1000px; margin: auto; }
+    h2 { color: var(--primary); margin-bottom: 20px; }
+    ul { list-style: none; padding: 0; }
+    .card { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .projects .project { margin-bottom: 20px; }
+    .project h3 { color: var(--accent); }
+    a { color: var(--primary); text-decoration: none; }
+    footer { background: var(--primary); color: white; text-align: center; padding: 15px; margin-top: 40px; }
   </style>
 </head>
 <body>
   <header>
-    <h1>Omar Ahmed Waqqad</h1>
-    <p>Flutter Developer | Mobile App Developer</p>
+    <h1>Omar Waqqad</h1>
+    <p>Mobile App Developer | Flutter Developer</p>
   </header>
 
-  <section>
-    <h2>About Me</h2>
-    <p>I am a motivated Flutter developer and final-year Computer Science student at Modern Academy, also a participant in the DEPI program. I specialize in building cross-platform mobile apps with clean code, intuitive UIs, and scalable architecture.</p>
-  </section>
+<section>
+  <h2>About Me</h2>
+  <div class="card">
+    <p>I am a motivated Flutter developer passionate about crafting intuitive, high-performance mobile applications. Through the DEPI program and hands-on projects, I’ve honed strong skills in cross-platform development, state management, and problem-solving with algorithms. My focus is on building apps that are clean, scalable, and enjoyable to use.</p>
+  </div>
+</section>
 
   <section>
     <h2>Skills</h2>
-    <p>Flutter, Dart, GetX, Bloc, SQL, NoSQL, Firebase, Java, Python, C++</p>
+    <div class="card">
+      <p><strong>Languages/Frameworks:</strong> Flutter, Dart, Java, Python, C++</p>
+      <p><strong>State Management:</strong> GetX, Bloc</p>
+      <p><strong>Databases:</strong> SQL, NoSQL, Firebase</p>
+    </div>
   </section>
 
   <section>
     <h2>Services</h2>
-    <ul>
-      <li>📱 Cross-platform mobile app development</li>
-      <li>⚡ State management (GetX, Bloc)</li>
-      <li>☁️ Firebase integration (Auth, DB, Notifications)</li>
-      <li>🗄️ SQL & NoSQL database integration</li>
-      <li>🤖 Algorithmic & AI features (A*, Minimax)</li>
-    </ul>
+    <div class="card">
+      <ul>
+        <li>📱 Cross-platform mobile app development</li>
+        <li>⚡ State management (GetX, Bloc)</li>
+        <li>☁️ Firebase integration (Auth, DB, Notifications)</li>
+        <li>🗄️ SQL & NoSQL database integration</li>
+        <li>🤖 Algorithmic & AI features (A*, Minimax)</li>
+      </ul>
+    </div>
   </section>
 
   <section class="projects">
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>Metro Guide App</h3>
-      <p>A mobile app that helps users navigate metro stations with intuitive UI and real-time updates. Built with Flutter.</p>
-    </div>
-    <div class="project">
-      <h3>Pac-Man AI Game</h3>
-      <p>A Pac-Man game with AI-controlled ghosts using A* and Minimax algorithms for smart movement and decision-making.</p>
-    </div>
-  </section>
+  <h2>Projects</h2>
+  <div class="card project">
+    <h3><a href="metro.html">Metro Guide App</a></h3>
+    <p>A mobile app that helps users navigate metro stations with intuitive UI and real-time updates. Built with Flutter.</p>
+  </div>
+  <div class="card project">
+    <h3><a href="pacman.html">Pac-Man AI Game</a></h3>
+    <p>A Pac-Man game with AI-controlled ghosts using A* and Minimax algorithms for smart movement and decision-making.</p>
+  </div>
+</section>
 
   <section>
     <h2>Education</h2>
-    <p>🎓 Bachelor’s in Computer Science (Final Year) – Modern Academy</p>
-    <p>🎓 DEPI Program – Cross-Platform Development</p>
+    <div class="card">
+      <p>🎓 Bachelor’s in Computer Science (Final Year) – Modern Academy</p>
+      <p>🎓 DEPI Program – Cross-Platform Development</p>
+    </div>
   </section>
 
   <section>
     <h2>Contact</h2>
-    <p>Email: <a href="mailto:waqado@gmail.com">waqado@gmail.com</a></p>
-    <p>GitHub: <a href="https://github.com/omarwaqad">github.com/omarwaqad</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/omar-waqqad-3318a8284/">linkedin.com/in/omar-waqqad</a></p>
+    <div class="card">
+      <p>Email: <a href="mailto:waqado@gmail.com">waqado@gmail.com</a></p>
+      <p>GitHub: <a href="https://github.com/omarwaqad">github.com/omarwaqad</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/omar-waqqad-3318a8284/">linkedin.com/in/omar-waqqad</a></p>
+    </div>
   </section>
 
   <footer>
